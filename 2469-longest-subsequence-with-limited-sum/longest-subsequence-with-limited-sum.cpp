@@ -14,14 +14,17 @@ public:
         for(int i=0;i<m;i++)
         {
             int len=0;
-            for(int j=0;j<n;j++)
+            int low=0;
+            int high=n-1;
+            while(low<=high)
             {
-                if(queries[i]<nums[j])
+                int mid=(low+high)/2;
+                if(nums[mid]>queries[i])high=mid-1;
+                else
                 {
-                    len=j;
-                    break;
+                    len=mid+1;
+                    low=mid+1;
                 }
-                len++;
             }
             ans[i]=len;
         }
