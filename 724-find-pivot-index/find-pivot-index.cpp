@@ -3,21 +3,16 @@ public:
     int pivotIndex(vector<int>& nums) 
     {
         int n=nums.size();
-        //prefix calculation
-        vector<int> pre(n);
+        int leftsum=0;
+        int rightsum=0;
+        for(int i=0;i<n;i++)
+        rightsum+=nums[i];
+
         for(int i=0;i<n;i++)
         {
-            if(i==0)pre[i]=nums[i];
-            else pre[i]=pre[i-1]+nums[i];
-        }
-        //suffix calculation
-        for(int i=n-2;i>=0;i--)
-        {
-            nums[i]+=nums[i+1];
-        }
-        for(int i=0;i<n;i++)
-        {
-            if(nums[i]==pre[i])return i;
+            rightsum=rightsum-nums[i];
+            if(rightsum==leftsum)return i;
+            leftsum+=nums[i];
         }
         return -1;
 
