@@ -13,25 +13,14 @@ public:
     ListNode* middleNode(ListNode* head) 
     {
         ListNode* temp=head;
-        int c=0;
-//         finding length
-
-        while(temp!=NULL)
+        int count=1;
+        while(temp->next!=NULL)
         {
-             c++;
-             temp=temp->next;
-         }
-         //required pointer
-
-         temp=head;
-
-         int mid=ceil(c/2);
-
-         while(mid!=0){
-             temp=temp->next;
-             mid--;
-         }
-         return temp;
+            count++;
+            temp=temp->next;
+        }
+        for(int i=0;i<count/2;i++)head=head->next;
+        return head;
     }
 };
 
