@@ -12,15 +12,20 @@ class Solution {
 public:
     ListNode* mergeInBetween(ListNode* list1, int a, int b, ListNode* list2) 
     {
-        ListNode* p=list1; 
-        ListNode* q=list1;
+        ListNode* slow=list1;
+        ListNode* fast=list1;
 
-        for(int i=1;i<a;i++)p=p->next; 
-        for(int i=1;i<=b+1;i++)q=q->next;
+        for(int i=1;i<=b-a+2;i++)fast=fast->next;
+        for(int i=1;i<a;i++)
+        {
+            slow=slow->next;
+            fast=fast->next;
+        }
+        
         ListNode* temp=list2;
         while(temp->next!=NULL)temp=temp->next;
-        temp->next=q;
-        p->next=list2;
+        temp->next=fast;
+        slow->next=list2;
         return list1;
     }
 };
