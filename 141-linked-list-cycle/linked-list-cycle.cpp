@@ -10,23 +10,17 @@ class Solution {
 public:
     bool hasCycle(ListNode *head) 
     {
-        //   unordered_set<ListNode*> st;
 
         ListNode * slow=head;
         ListNode * fast=head;
-        bool flag=0;
         
         while(fast != NULL && fast->next !=NULL)
         {
             slow=slow->next;
             fast=fast->next->next;
-            if(slow==fast)
-            {
-                flag=1;
-                break;
-            }
+            if(slow==fast)return true;
         }
-        return flag;
+        return false;
           
         
     }
