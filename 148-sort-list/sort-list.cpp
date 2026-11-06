@@ -26,28 +26,17 @@ public:
     ListNode* sort(ListNode* head)
     {
         if(head==NULL || head->next==NULL)return head;
-        ListNode* temp=head;
-        int len=0;
-        while(temp!=NULL)
+        ListNode* slow=head;
+        ListNode* fast=head;
+        while(fast->next!=NULL && fast->next->next!=NULL)
         {
-            len++;
-            temp=temp->next;
+            slow=slow->next;
+            fast=fast->next->next;
         }
-        temp=head;
         ListNode* a=head;
-        ListNode* b=head;
-        if(len%2!=0)
-        {
-            for(int i=1;i<len/2;i++)temp=temp->next;
-            b=temp->next;
-            temp->next=NULL;
-        }
-        else 
-        {
-            for(int i=1;i<(len/2)-1;i++)temp=temp->next;
-            b=temp->next;
-            temp->next=NULL;
-        }
+        ListNode* b=slow->next;
+        slow->next=NULL;
+        
         a=sort(a);
         b=sort(b);
         return mergeTwoLists(a,b);
