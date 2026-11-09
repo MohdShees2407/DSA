@@ -1,21 +1,21 @@
+
 class Solution {
 public:
     bool isPalindrome(ListNode* head) 
     {
-        //dublicate linked list
-        ListNode * temp=head;
-        ListNode * c = new ListNode(10);
-        ListNode * tempC=c;
-        while(temp!=NULL)
+        ListNode* slow=head;
+        ListNode* fast=head;
+        while(fast->next!=NULL && fast->next->next!=NULL)
         {
-            ListNode * n = new ListNode(temp->val);
-            tempC->next=n;
-            tempC=tempC->next;
-            temp=temp->next;
+            slow=slow->next;
+            fast=fast->next->next;
         }
+        ListNode* n=slow->next; 
+        slow->next=NULL;
 
-        ListNode* cur=c->next;
+        //REVERSE HALF LIST
         ListNode* pre=NULL;
+        ListNode* cur=n;
         ListNode* Next=NULL;
         while(cur!=NULL)
         {
@@ -27,13 +27,12 @@ public:
 
         while(pre!=NULL)
         {
-            if(pre->val!=head->val)return false;
-            pre=pre->next;
+            if(head->val!=pre->val)return false;
             head=head->next;
+            pre=pre->next;
         }
-        
+         
         return true;
-        
     }
 };
 
