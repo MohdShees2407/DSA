@@ -1,0 +1,23 @@
+class Solution {
+public:
+    void Parenthesis(vector<string>& ans,string s,int open,int close,int n)
+    {
+        if(close==n)
+        {
+            ans.push_back(s);
+            return;
+        }
+        if(open<n)Parenthesis(ans,s+'(',open+1,close,n);
+        if(open>close)Parenthesis(ans,s+')',open,close+1,n);
+    }
+    vector<string> generateParenthesis(int n) 
+    {
+        vector<string> ans;
+        Parenthesis(ans,"",0,0,n);
+        return ans;
+    }
+};
+
+// Synced seamlessly with LeetHub Pro
+// Pro features: https://bit.ly/leethubpro | Free version: https://bit.ly/leethubv4
+// Get it here: https://chromewebstore.google.com/detail/bcilpkkbokcopmabingnndookdogmbna
